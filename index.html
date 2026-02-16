@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>씽크제작소 | 맞춤 제작</title>
+  <meta name="description" content="공간에 맞춘 씽크대 제작 전문, 씽크제작소. 인천/경기/서울/그외 맞춤 제작 및 설치." />
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="#top">씽크제작소</a>
+
+      <nav class="nav">
+        <a href="#about">회사소개</a>
+        <a href="#services">서비스</a>
+        <a href="#projects">시공사례</a>
+        <a class="nav__cta" href="#contact">문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+       <h1 class="hero__title">
+       씽크제작소
+       </h1>
+       <!-- <p class="hero__subtitle">
+       공간에 맞춘 씽크대 제작 전문
+       </p>-->
+          <p class="hero__desc">
+            인천/경기/서울/그외 지역 맞춤 제작·설치 <br>
+            상담 → 실측 → 제작 → 설치까지 한 번에 진행합니다.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#contact">견적/상담 문의</a>
+            <a class="btn btn--ghost" href="https://naver.me/Gy3IjJvd" target="_blank" rel="noopener">
+            📍 오시는 길
+            </a>
+
+          </div>
+
+          <div class="hero__meta">
+            <div>📍 인천 · 경기 · 서울 · 그외</div>
+            <div>⏱️ 빠른 상담 / 일정 조율 가능</div>
+            <div>🛠️ 1년 무상 A/S 보장</div>
+          </div>
+        </div>
+
+ <div class="hero__card">
+  <img src="assets/p5.jpg" alt="대표 시공 사례" />
+</div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <h2 class="section__title">회사소개</h2>
+
+    <p class="about__text">
+      씽크제작소는 10년 이상 현장에서 검증된 시공 경험을 바탕으로
+      <span class="about__highlight">공장 직영 제작 시스템</span>을 운영하고 있습니다.
+    </p>
+
+    <p class="about__text">
+      직접 설계하고 제작하기 때문에 불필요한 중간 유통이 없으며,
+      공간에 맞춘 정밀한 설계와 마감 디테일까지 책임집니다.
+    </p>
+
+    <div class="cards" style="margin-top:32px;">
+      <div class="card">
+        <div class="card__title">10년 이상 현장 경험</div>
+        <p class="card__desc">지역에서 검증된 시공 노하우와 기술력</p>
+      </div>
+
+      <div class="card">
+        <div class="card__title">공장 직영 제작</div>
+        <p class="card__desc">중간 유통 없이 직접 제작·설치</p>
+      </div>
+
+      <div class="card">
+        <div class="card__title">책임 시공 시스템</div>
+        <p class="card__desc">설계부터 마감까지 한 팀이 관리</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- SERVICES -->
+    <section id="services" class="section section--alt">
+      <div class="container">
+        <h2 class="section__title">서비스</h2>
+        <p class="section__subtitle">설계부터 제작, 설치까지 직접 책임지는 맞춤 제작 서비스</p>
+
+        <div class="cards">
+       <div class="card featured">
+       <div class="badge">대표</div>
+        <div class="card__title">씽크대</div>
+       <p class="card__desc">주방 구조에 맞춘 맞춤 제작 및 설치</p>
+        </div>
+          <div class="card">
+            <div class="card__title">붙박이장</div>
+            <p class="card__desc">공간 활용을 극대화하는 수납 솔루션</p>
+          </div>
+          <div class="card">
+            <div class="card__title">신발장 · 서랍장</div>
+            <p class="card__desc">현관/방/거실 등 맞춤 수납 제작</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS (임시: 나중에 Sanity로 자동 로딩) -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section__row">
+          <div>
+            <h2 class="section__title">시공사례</h2>
+            <p class="section__subtitle">직접 제작·시공한 실제 사례입니다.</p>
+          </div>
+
+          <div class="filters">
+            <select id="filterRegion">
+              <option value="">지역 전체</option>
+              <option value="incheon">인천</option>
+              <option value="gyeonggi">경기</option>
+              <option value="seoul">서울</option>
+              <option value="other">그외</option>
+            </select>
+
+            <select id="filterWork">
+              <option value="">작업 전체</option>
+              <option value="sink">씽크대</option>
+              <option value="built_in">붙박이장</option>
+              <option value="shoe">신발장</option>
+              <option value="drawer">서랍장</option>
+            </select>
+
+            <input id="filterQ" type="search" placeholder="검색(예: 부평, ㄱ자, 화이트)" />
+          </div>
+        </div>
+
+        <div id="projectGrid" class="grid"></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section section--alt">
+      <div class="container">
+        <h2 class="section__title">문의</h2>
+        <p class="section__subtitle">아래 정보로 편하게 연락 주세요.</p>
+
+        <div class="contact">
+          <div class="contact__box">
+            <div class="contact__label">전화</div>
+            <a class="contact__value" href="tel:010-9181-5373">010-9181-5373</a>
+
+            <div class="contact__label">카카오톡</div>
+            <a class="contact__link" href="#" target="_blank" rel="noreferrer">카카오 채널 링크(나중에 넣기)</a>
+
+            <div class="contact__label">주소</div>
+            <div class="contact__text">인천 부평구 경인로891번길 3</div>
+          </div>
+
+          <div class="contact__box">
+            <div class="contact__label">문의할 때 알려주면 좋아요</div>
+            <ol class="contact__list">
+              <li>원하시는 작업(씽크대/붙박이장/신발장/서랍장)</li>
+              <li>대략적인 사이즈(가로/세로)</li>
+              <li>색감/재질(화이트, 우드 등)</li>
+              <li>지역/희망 일정</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<footer class="footer">
+  <div class="container footer__inner" style="flex-direction:column; gap:8px;">
+
+    <div style="font-weight:600; color:var(--text);">
+      씽크제작소
+    </div>
+
+    <div style="font-size:13px;">
+      대표자 : 홍현기 | 사업자등록번호 : 403-16-52620
+    </div>
+
+    <div style="font-size:13px;">
+      주소 : 인천 부평구 경인로891번길 3
+    </div>
+
+    <div style="font-size:13px;">
+      전화 : 010-9181-5373
+    </div>
+
+    <div style="font-size:12px; color:var(--muted); margin-top:6px;">
+      © <span id="year"></span> 씽크제작소. All rights reserved.
+    </div>
+
+  </div>
+</footer>
+
+
+  <script src="./script.js"></script>
+</body>
+</html>
