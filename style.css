@@ -63,7 +63,9 @@ body{
   background:#fff;font-weight:600;font-size:14px;
 }
 .btn:hover{box-shadow:var(--shadow)}
-.btn--primary{background:#111827;color:#fff;border-color:#111827}
+.btn--primary{
+  background:#444444;
+  color:#fff;}
 .hero__meta{margin-top:16px;color:var(--muted);font-size:14px;display:grid;gap:4px}
 .hero__card{
   border-radius: var(--radius);
@@ -305,9 +307,7 @@ input[type="search"]{min-width:220px}
 }
 @media (max-width: 600px){
   .hero__title{
-    font-size: 24px;
+    font-size: 22px;
     line-height: 1.3;
   }
 }
-
-
