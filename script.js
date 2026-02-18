@@ -1,7 +1,6 @@
 // =========================
 // 0) 라벨(표시용)
 // =========================
-const REGION_LABEL = { incheon: "인천", gyeonggi: "경기", seoul: "서울", other: "그외" };
 const WORK_LABEL = { sink: "씽크대", built_in: "붙박이장", shoe: "신발장", drawer: "서랍장" };
 
 // =========================
@@ -39,10 +38,9 @@ function toProject(p) {
   };
 }
 
-async function fetchProjects({ region = "", work = "", q = "", limit = null } = {}) {
+async function fetchProjects({ work = "", q = "", limit = null } = {}) {
 
   const where = [`_type == "project"`];
-  if (region) where.push(`region == "${region}"`);
   if (work) where.push(`"${work}" in works`);
   if (q) where.push(`(title match "*${q}*" || summary match "*${q}*")`);
 
@@ -141,7 +139,6 @@ const els = {
 async function renderList() {
   if (!els.grid) return;
 
-  const region = els.region?.value || "";
   const work = els.work?.value || "";
   const q = (els.q?.value || "").trim();
 
@@ -152,7 +149,6 @@ async function renderList() {
 const isHome = window.location.pathname.endsWith("/") || window.location.pathname.endsWith("index.html");
 
 items = await fetchProjects({
-  region,
   work,
   q,
   limit: isHome ? 6 : null
