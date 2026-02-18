@@ -303,4 +303,10 @@ input[type="search"]{min-width:220px}
     height:28px;
   }
 }
+@media (max-width: 600px){
+  .hero__title{
+    font-size: 22px;
+    line-height: 1.3;
+  }
+}
 
