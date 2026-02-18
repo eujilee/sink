@@ -259,3 +259,37 @@ if (els.q) els.q.addEventListener("input", renderList);
 
 renderList();
 renderDetail();
+function initSlider() {
+  const slider = document.querySelector(".slider");
+  if (!slider) return;
+
+  const track = slider.querySelector(".slider__track");
+  const slides = track.querySelectorAll("img");
+  const prevBtn = slider.querySelector(".slider__prev");
+  const nextBtn = slider.querySelector(".slider__next");
+
+  let index = 0;
+  const total = slides.length;
+
+  function updateSlide() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function nextSlide() {
+    index = (index + 1) % total;
+    updateSlide();
+  }
+
+  function prevSlide() {
+    index = (index - 1 + total) % total;
+    updateSlide();
+  }
+
+  nextBtn.addEventListener("click", nextSlide);
+  prevBtn.addEventListener("click", prevSlide);
+
+  // 자동 슬라이드 (3초)
+  setInterval(nextSlide, 3000);
+}
+
+document.addEventListener("DOMContentLoaded", initSlider);
