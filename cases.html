@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>시공사례 | 씽크제작소</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="logo" href="./index.html">
+      <img src="./assets/logo.png" alt="씽크제작소 로고" />
+    </a>
+    <nav class="nav">
+      <a href="./index.html#about">회사소개</a>
+      <a href="./cases.html" class="is-active">시공사례</a>
+      <a href="./index.html#contact">문의</a>
+    </nav>
+  </div>
+</header>
+
+<main class="section">
+  <div class="container">
+    <h1 class="section__title">시공사례</h1>
+    <p class="section__subtitle">전체 시공사례를 확인해보세요.</p>
+
+    <div id="projectGrid" class="grid"></div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    © <span id="year"></span> 씽크제작소
+  </div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<script src="./script.js"></script>
+</body>
+</html>

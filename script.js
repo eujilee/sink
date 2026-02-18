@@ -39,16 +39,20 @@ function toProject(p) {
   };
 }
 
-async function fetchProjects({ region = "", work = "", q = "" } = {}) {
+async function fetchProjects({ region = "", work = "", q = "", limit = null } = {}) {
+
   const where = [`_type == "project"`];
   if (region) where.push(`region == "${region}"`);
   if (work) where.push(`"${work}" in works`);
   if (q) where.push(`(title match "*${q}*" || summary match "*${q}*")`);
 
   // 목록은 썸네일/요약만 필요
-  const groq = `*[
-    ${where.join(" && ")}
-  ] | order(date desc){
+const range = (typeof limit === "number") ? `[0...${limit}]` : "";
+
+const groq = `*[
+  ${where.join(" && ")}
+] | order(date desc)${range}{
+   
     _id,
     "slug": slug.current,
     title, date, region, works, summary,
@@ -145,7 +149,15 @@ async function renderList() {
 
   let items = [];
   try {
-    items = await fetchProjects({ region, work, q });
+const isHome = window.location.pathname.endsWith("/") || window.location.pathname.endsWith("index.html");
+
+items = await fetchProjects({
+  region,
+  work,
+  q,
+  limit: isHome ? 6 : null
+});
+
   } catch (e) {
     console.error(e);
     els.grid.innerHTML = `<div class="card" style="grid-column:1/-1">데이터를 불러오지 못했어요. (CORS/Project ID 확인)</div>`;
