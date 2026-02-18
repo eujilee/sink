@@ -54,7 +54,7 @@ body{
 
 .hero{border-bottom:1px solid var(--line)}
 .hero__grid{display:grid;gap:22px;grid-template-columns:1fr; padding:48px 0}
-.hero__title{margin:0;font-size:32px;letter-spacing:-.03em;line-height:1.2}
+.hero__title{margin:0;font-size:30px;letter-spacing:-.03em;line-height:1.2}
 .hero__desc{margin:14px 0 0;color:var(--muted)}
 .hero__actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
 .btn{
