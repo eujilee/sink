@@ -329,4 +329,20 @@ input[type="search"]{min-width:220px}
   display:flex;
   justify-content:center;
 }
+.back-link{
+  margin-bottom:16px;
+}
+
+.back-link a{
+  font-size:14px;
+  color:#666;
+  text-decoration:none;
+  font-weight:500;
+}
+
+.back-link a:hover{
+  color:#444444;
+}
+
+
 
