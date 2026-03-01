@@ -226,8 +226,14 @@ async function renderDetail() {
     return;
   }
 
-  const tags = (p.work || []).map((w) => WORK_LABEL[w] || w).join(", ");
-  const bodyHtml = renderContentBlocks(p.content);
+const tags = (p.work || []).map((w) => WORK_LABEL[w] || w).join(", ");
+
+// ✅ 대표이미지와 동일한 첫 이미지 블록은 자동으로 제거(중복 방지)
+const filteredContent = Array.isArray(p.content)
+  ? p.content.filter((b) => !(b?._type === "image" && b.url && p.image && b.url === p.image))
+  : [];
+
+const bodyHtml = renderContentBlocks(filteredContent);
 
   detailEl.innerHTML = `
     <div class="detail">
