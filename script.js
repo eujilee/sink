@@ -1,7 +1,13 @@
 // =========================
 // 0) 라벨(표시용)
 // =========================
-const WORK_LABEL = { sink: "씽크대", built_in: "붙박이장", shoe: "신발장", drawer: "홈바", etc: "기타" };
+const WORK_LABEL = {
+  sink: "씽크대",
+  built_in: "붙박이장",
+  shoe: "신발장",
+  drawer: "홈바",
+  etc: "기타",
+};
 
 // =========================
 // 1) Sanity 설정
@@ -30,30 +36,26 @@ function toProject(p) {
     slug: p.slug,
     title: p.title,
     date: p.date,
-    region: p.region,
     work: p.works || [],
     meta: p.summary || "",
     image: p.coverUrl || "",
-    content: p.content || [], // ✅ 글/사진 순서 블록
+    content: p.content || [],
   };
 }
 
 async function fetchProjects({ work = "", q = "", limit = null } = {}) {
-
   const where = [`_type == "project"`];
   if (work) where.push(`"${work}" in works`);
   if (q) where.push(`(title match "*${q}*" || summary match "*${q}*")`);
 
-  // 목록은 썸네일/요약만 필요
-const range = (typeof limit === "number") ? `[0...${limit}]` : "";
+  const range = typeof limit === "number" ? `[0...${limit}]` : "";
 
-const groq = `*[
-  ${where.join(" && ")}
-] | order(date desc)${range}{
-   
+  const groq = `*[
+    ${where.join(" && ")}
+  ] | order(date desc)${range}{
     _id,
     "slug": slug.current,
-    title, date, region, works, summary,
+    title, date, works, summary,
     "coverUrl": coverImage.asset->url
   }`;
 
@@ -62,11 +64,10 @@ const groq = `*[
 }
 
 async function fetchProjectBySlug(slug) {
-  // ✅ 상세는 content(글/사진 순서)까지 가져오기
   const groq = `*[_type=="project" && slug.current=="${slug}"][0]{
     _id,
     "slug": slug.current,
-    title, date, region, works, summary,
+    title, date, works, summary,
     "coverUrl": coverImage.asset->url,
 
     content[]{
@@ -127,11 +128,10 @@ function renderContentBlocks(blocks) {
 }
 
 // =========================
-// 4) index.html(목록) 렌더
+// 4) index.html / cases.html(목록) 렌더
 // =========================
 const els = {
   grid: document.getElementById("projectGrid"),
-  region: document.getElementById("filterRegion"),
   work: document.getElementById("filterWork"),
   q: document.getElementById("filterQ"),
 };
@@ -146,14 +146,14 @@ async function renderList() {
 
   let items = [];
   try {
-const isHome = window.location.pathname.endsWith("/") || window.location.pathname.endsWith("index.html");
+    const isHome =
+      window.location.pathname.endsWith("/") || window.location.pathname.endsWith("index.html");
 
-items = await fetchProjects({
-  work,
-  q,
-  limit: isHome ? 6 : null
-});
-
+    items = await fetchProjects({
+      work,
+      q,
+      limit: isHome ? 6 : null,
+    });
   } catch (e) {
     console.error(e);
     els.grid.innerHTML = `<div class="card" style="grid-column:1/-1">데이터를 불러오지 못했어요. (CORS/Project ID 확인)</div>`;
@@ -162,16 +162,14 @@ items = await fetchProjects({
 
   els.grid.innerHTML = items
     .map((p) => {
-      const regionLabel = REGION_LABEL[p.region] || p.region;
-      const tags = p.work.map((w) => WORK_LABEL[w] || w).join(", ");
-
+      const tags = (p.work || []).map((w) => WORK_LABEL[w] || w).join(", ");
       return `
         <a class="project" href="./project.html?slug=${encodeURIComponent(p.slug)}" title="상세 보기">
           <div class="project__thumb">
             <img src="${p.image}" alt="${p.title}" loading="lazy" />
           </div>
           <div class="project__body">
-            <div class="project__meta">${regionLabel}${p.date ? " · " + p.date : ""}</div>
+            <div class="project__meta">${p.date ? p.date : ""}</div>
             <div class="project__title">${p.title}</div>
             <div class="project__tags">${tags}${p.meta ? " · " + p.meta : ""}</div>
           </div>
@@ -228,13 +226,12 @@ async function renderDetail() {
     return;
   }
 
-  const regionLabel = REGION_LABEL[p.region] || p.region;
-  const tags = p.work.map((w) => WORK_LABEL[w] || w).join(", ");
+  const tags = (p.work || []).map((w) => WORK_LABEL[w] || w).join(", ");
   const bodyHtml = renderContentBlocks(p.content);
 
   detailEl.innerHTML = `
     <div class="detail">
-      <div class="detail__meta">${regionLabel}${p.date ? " · " + p.date : ""} · ${tags}</div>
+      <div class="detail__meta">${p.date ? p.date : ""}${tags ? " · " + tags : ""}</div>
       <h1 class="detail__title">${p.title}</h1>
       ${p.meta ? `<p class="detail__desc">${p.meta}</p>` : ""}
 
@@ -248,7 +245,7 @@ async function renderDetail() {
 
       <div class="detail__cta card" style="margin-top:16px">
         <div class="card__title">이 시공과 비슷하게 원하시나요?</div>
-        <p class="card__desc">작업 종류/사이즈/지역을 알려주시면 빠르게 안내드릴게요.</p>
+        <p class="card__desc">작업 종류/사이즈를 알려주시면 빠르게 안내드릴게요.</p>
         <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
           <a class="btn btn--primary" href="./index.html#contact">문의하기</a>
           <a class="btn" href="tel:010-9181-5373">전화하기</a>
@@ -259,14 +256,8 @@ async function renderDetail() {
 }
 
 // =========================
-// 6) 이벤트 바인딩 & 실행
+// 6) 슬라이더
 // =========================
-if (els.region) els.region.addEventListener("change", renderList);
-if (els.work) els.work.addEventListener("change", renderList);
-if (els.q) els.q.addEventListener("input", renderList);
-
-renderList();
-renderDetail();
 function initSlider() {
   const slider = document.querySelector(".slider");
   if (!slider) return;
@@ -293,11 +284,18 @@ function initSlider() {
     updateSlide();
   }
 
-  nextBtn.addEventListener("click", nextSlide);
-  prevBtn.addEventListener("click", prevSlide);
+  if (nextBtn) nextBtn.addEventListener("click", nextSlide);
+  if (prevBtn) prevBtn.addEventListener("click", prevSlide);
 
-  // 자동 슬라이드 (3초)
   setInterval(nextSlide, 3000);
 }
 
+// =========================
+// 7) 이벤트 바인딩 & 실행
+// =========================
+if (els.work) els.work.addEventListener("change", renderList);
+if (els.q) els.q.addEventListener("input", renderList);
+
+renderList();
+renderDetail();
 document.addEventListener("DOMContentLoaded", initSlider);
