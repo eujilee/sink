@@ -324,6 +324,12 @@ input[type="search"]{min-width:220px}
 .cards .card:hover{
   border-color: #444444;
 }
+.cards .card:active,
+.cards .card:focus,
+.cards .card:focus-visible{
+  border-color:#444444;
+  outline:none;
+}
 .more-wrap{
   margin-top:20px;
   display:flex;
