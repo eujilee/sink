@@ -27,6 +27,9 @@
         <a href="#services">서비스</a>
         <a href="#projects">시공사례</a>
         <a class="nav__cta" href="#contact">문의</a>
+        <button class="nav__hamburger" aria-label="메뉴 열기" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </nav>
     </div>
   </header>
@@ -65,13 +68,18 @@
 
 <div class="hero__card slider">
   <div class="slider__track">
-    <img src="assets/hero1.webp" alt="시공 사례 1" />
-    <img src="assets/hero2.webp" alt="시공 사례 2" />
-    <img src="assets/hero3.webp" alt="시공 사례 3" />
+    <img src="assets/hero1.webp" alt="시공 사례 1" loading="eager" />
+    <img src="assets/hero2.webp" alt="시공 사례 2" loading="lazy" />
+    <img src="assets/hero3.webp" alt="시공 사례 3" loading="lazy" />
   </div>
 
-  <button class="slider__btn slider__prev">&#10094;</button>
-  <button class="slider__btn slider__next">&#10095;</button>
+  <button class="slider__btn slider__prev" aria-label="이전 사진">&#10094;</button>
+  <button class="slider__btn slider__next" aria-label="다음 사진">&#10095;</button>
+  <div class="slider__dots" aria-hidden="true">
+    <span class="slider__dot is-active"></span>
+    <span class="slider__dot"></span>
+    <span class="slider__dot"></span>
+  </div>
 </div>
       </div>
     </section>
@@ -148,7 +156,7 @@
 
       </div>
           <div class="filters">
-
+            <label for="filterWork" class="sr-only">작업 종류 필터</label>
             <select id="filterWork">
               <option value="">작업 전체</option>
               <option value="sink">씽크대</option>
@@ -158,6 +166,7 @@
               <option value="etc">기타</option>
             </select>
 
+            <label for="filterQ" class="sr-only">키워드 검색</label>
             <input id="filterQ" type="search" placeholder="검색(예: ㄱ자, 대리석, 화이트)" />
 
             <a class="btn btn--primary" href="./cases.html">더보기</a>

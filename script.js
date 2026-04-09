@@ -272,12 +272,14 @@ function initSlider() {
   const slides = track.querySelectorAll("img");
   const prevBtn = slider.querySelector(".slider__prev");
   const nextBtn = slider.querySelector(".slider__next");
+  const dots = slider.querySelectorAll(".slider__dot");
 
   let index = 0;
   const total = slides.length;
 
   function updateSlide() {
     track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
   }
 
   function nextSlide() {
@@ -302,6 +304,30 @@ function initSlider() {
 }
 
 // =========================
+// 8) 햄버거 메뉴
+// =========================
+function initHamburger() {
+  const hamburger = document.querySelector(".nav__hamburger");
+  const nav = document.querySelector(".nav");
+  if (!hamburger || !nav) return;
+
+  hamburger.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("is-open");
+    hamburger.setAttribute("aria-expanded", isOpen);
+    hamburger.setAttribute("aria-label", isOpen ? "메뉴 닫기" : "메뉴 열기");
+  });
+
+  // 메뉴 링크 클릭 시 닫기
+  nav.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => {
+      nav.classList.remove("is-open");
+      hamburger.setAttribute("aria-expanded", "false");
+      hamburger.setAttribute("aria-label", "메뉴 열기");
+    });
+  });
+}
+
+// =========================
 // 7) 이벤트 바인딩 & 실행
 // =========================
 if (els.work) els.work.addEventListener("change", renderList);
@@ -309,4 +335,7 @@ if (els.q) els.q.addEventListener("input", renderList);
 
 renderList();
 renderDetail();
-document.addEventListener("DOMContentLoaded", initSlider);
+document.addEventListener("DOMContentLoaded", () => {
+  initSlider();
+  initHamburger();
+});

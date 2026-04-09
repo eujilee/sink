@@ -8,7 +8,7 @@
   <meta property="og:title" content="시공사례 상세 | 씽크제작소" />
   <meta property="og:description" content="씽크제작소 시공사례 상세 페이지. 맞춤 제작 씽크대, 붙박이장, 신발장, 홈바 시공 과정과 결과를 확인하세요." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="./assets/hero1.jpg" />
+  <meta property="og:image" content="./assets/hero1.webp" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 
@@ -24,6 +24,9 @@
         <a href="./index.html#services">서비스</a>
         <a href="./index.html#projects">시공사례</a>
         <a class="nav__cta" href="./index.html#contact">문의</a>
+        <button class="nav__hamburger" aria-label="메뉴 열기" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </nav>
     </div>
   </header>
@@ -39,13 +42,20 @@
     </div>
   </main>
 
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div>© <span id="year"></span> 씽크제작소</div>
-      <div class="footer__small">인천/경기/서울/그외 · 맞춤 제작</div>
+<footer class="footer">
+  <div class="container footer__inner" style="flex-direction:column; gap:8px;">
+    <div style="font-weight:600; color:var(--text);">씽크제작소</div>
+    <div style="font-size:13px;">대표자 : 홍현기 | 사업자등록번호 : 403-16-52620</div>
+    <div style="font-size:13px;">주소 : 인천 부평구 경인로891번길 3</div>
+    <div style="font-size:13px;">전화 : 010-9181-5373 | e-mail : gusrl3925@naver.com</div>
+    <div style="font-size:13px;">계좌 : 새마을금고 2316100175230 홍현기(씽크제작소)</div>
+    <div style="font-size:12px; color:var(--muted); margin-top:6px;">
+      © <span id="year"></span> 씽크제작소. All rights reserved.
     </div>
-  </footer>
+  </div>
+</footer>
 
   <script src="./script.js"></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
