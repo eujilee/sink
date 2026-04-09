@@ -162,16 +162,16 @@ async function renderList() {
 
   els.grid.innerHTML = items
     .map((p) => {
-      const tags = (p.work || []).map((w) => WORK_LABEL[w] || w).join(", ");
+      const tags = (p.work || []).map((w) => escapeHtml(WORK_LABEL[w] || w)).join(", ");
       return `
         <a class="project" href="./project.html?slug=${encodeURIComponent(p.slug)}" title="상세 보기">
           <div class="project__thumb">
-            <img src="${p.image}" alt="${p.title}" loading="lazy" />
+            <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy" />
           </div>
           <div class="project__body">
-            <div class="project__meta">${p.date ? p.date : ""}</div>
-            <div class="project__title">${p.title}</div>
-            <div class="project__tags">${tags}${p.meta ? " · " + p.meta : ""}</div>
+            <div class="project__meta">${p.date ? escapeHtml(p.date) : ""}</div>
+            <div class="project__title">${escapeHtml(p.title)}</div>
+            <div class="project__tags">${tags}${p.meta ? " · " + escapeHtml(p.meta) : ""}</div>
           </div>
         </a>
       `;
@@ -226,7 +226,7 @@ async function renderDetail() {
     return;
   }
 
-const tags = (p.work || []).map((w) => WORK_LABEL[w] || w).join(", ");
+const tags = (p.work || []).map((w) => escapeHtml(WORK_LABEL[w] || w)).join(", ");
 
 // ✅ 대표이미지와 동일한 첫 이미지 블록은 자동으로 제거(중복 방지)
 const filteredContent = Array.isArray(p.content)
@@ -237,9 +237,9 @@ const bodyHtml = renderContentBlocks(filteredContent);
 
   detailEl.innerHTML = `
     <div class="detail">
-      <div class="detail__meta">${p.date ? p.date : ""}${tags ? " · " + tags : ""}</div>
-      <h1 class="detail__title">${p.title}</h1>
-      ${p.meta ? `<p class="detail__desc">${p.meta}</p>` : ""}
+      <div class="detail__meta">${p.date ? escapeHtml(p.date) : ""}${tags ? " · " + tags : ""}</div>
+      <h1 class="detail__title">${escapeHtml(p.title)}</h1>
+      ${p.meta ? `<p class="detail__desc">${escapeHtml(p.meta)}</p>` : ""}
 
       <div class="detail__hero">
         <img src="${p.image}" alt="${p.title}" />
@@ -290,10 +290,15 @@ function initSlider() {
     updateSlide();
   }
 
-  if (nextBtn) nextBtn.addEventListener("click", nextSlide);
-  if (prevBtn) prevBtn.addEventListener("click", prevSlide);
+  let autoPlay = setInterval(nextSlide, 3000);
 
-  setInterval(nextSlide, 3000);
+  function resetAutoPlay() {
+    clearInterval(autoPlay);
+    autoPlay = setInterval(nextSlide, 3000);
+  }
+
+  if (nextBtn) nextBtn.addEventListener("click", () => { nextSlide(); resetAutoPlay(); });
+  if (prevBtn) prevBtn.addEventListener("click", () => { prevSlide(); resetAutoPlay(); });
 }
 
 // =========================
