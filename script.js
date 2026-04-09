@@ -146,8 +146,7 @@ async function renderList() {
 
   let items = [];
   try {
-    const isHome =
-      window.location.pathname.endsWith("/") || window.location.pathname.endsWith("index.html");
+    const isHome = !window.location.pathname.includes("cases.html");
 
     items = await fetchProjects({
       work,
@@ -304,28 +303,14 @@ function initSlider() {
 }
 
 // =========================
-// 8) 햄버거 메뉴
+// 7) 이벤트 바인딩 & 실행
 // =========================
-function initHamburger() {
-  const hamburger = document.querySelector(".nav__hamburger");
-  const nav = document.querySelector(".nav");
-  if (!hamburger || !nav) return;
+if (els.work) els.work.addEventListener("change", renderList);
+if (els.q) els.q.addEventListener("input", renderList);
 
-  hamburger.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("is-open");
-    hamburger.setAttribute("aria-expanded", isOpen);
-    hamburger.setAttribute("aria-label", isOpen ? "메뉴 닫기" : "메뉴 열기");
-  });
-
-  // 메뉴 링크 클릭 시 닫기
-  nav.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", () => {
-      nav.classList.remove("is-open");
-      hamburger.setAttribute("aria-expanded", "false");
-      hamburger.setAttribute("aria-label", "메뉴 열기");
-    });
-  });
-}
+renderList();
+renderDetail();
+document.addEventListener("DOMContentLoaded", initSlider);
 
 // =========================
 // 7) 이벤트 바인딩 & 실행
@@ -335,7 +320,4 @@ if (els.q) els.q.addEventListener("input", renderList);
 
 renderList();
 renderDetail();
-document.addEventListener("DOMContentLoaded", () => {
-  initSlider();
-  initHamburger();
-});
+document.addEventListener("DOMContentLoaded", initSlider);
