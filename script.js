@@ -146,13 +146,14 @@ async function renderList() {
 
   let items = [];
   try {
-    // 필터가 있으면 cases 페이지, 없으면 홈
-    const isCasesPage = !!els.work || !!els.q;
+    // data-limit 속성이 있으면 그 값, 없으면 전체
+    const limitAttr = els.grid.dataset.limit;
+    const limit = limitAttr ? parseInt(limitAttr) : null;
 
     items = await fetchProjects({
       work,
       q,
-      limit: isCasesPage ? null : 6,
+      limit,
     });
   } catch (e) {
     console.error(e);
