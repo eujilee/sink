@@ -146,7 +146,8 @@ async function renderList() {
 
   let items = [];
   try {
-    const isHome = !window.location.pathname.includes("cases.html");
+    const p = window.location.pathname;
+    const isHome = !p.includes("cases.html") && !p.includes("/cases");
 
     items = await fetchProjects({
       work,
