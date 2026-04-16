@@ -146,13 +146,13 @@ async function renderList() {
 
   let items = [];
   try {
-    const p = window.location.pathname;
-    const isHome = !p.includes("cases.html") && !p.includes("/cases");
+    // 필터가 있으면 cases 페이지, 없으면 홈
+    const isCasesPage = !!els.work || !!els.q;
 
     items = await fetchProjects({
       work,
       q,
-      limit: isHome ? 6 : null,
+      limit: isCasesPage ? null : 6,
     });
   } catch (e) {
     console.error(e);
