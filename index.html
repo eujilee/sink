@@ -266,16 +266,40 @@
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 <script>
 // 다른 페이지에서 #anchor로 넘어올 때 헤더 높이만큼 보정
+// 시공사례 이미지 로딩으로 레이아웃이 밀리므로 그리드 렌더 완료 후 스크롤
 window.addEventListener("load", () => {
   const hash = window.location.hash;
   if (!hash) return;
   const target = document.querySelector(hash);
   if (!target) return;
-  setTimeout(() => {
+
+  function scrollToTarget() {
     const headerH = document.querySelector(".header")?.offsetHeight || 64;
     const top = target.getBoundingClientRect().top + window.scrollY - headerH - 16;
     window.scrollTo({ top, behavior: "smooth" });
-  }, 100);
+  }
+
+  const grid = document.getElementById("projectGrid");
+  if (!grid) {
+    setTimeout(scrollToTarget, 200);
+    return;
+  }
+
+  // 그리드에 카드가 들어올 때까지 기다렸다가 스크롤
+  const observer = new MutationObserver(() => {
+    if (grid.children.length > 0) {
+      observer.disconnect();
+      // 이미지 로드까지 여유 시간
+      setTimeout(scrollToTarget, 400);
+    }
+  });
+  observer.observe(grid, { childList: true });
+
+  // 혹시 이미 로드됐거나 3초 이상 걸리면 강제 실행
+  setTimeout(() => {
+    observer.disconnect();
+    scrollToTarget();
+  }, 3000);
 });
 </script>
 </body>
