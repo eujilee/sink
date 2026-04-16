@@ -4,13 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>시공사례 | 인천 씽크대·붙박이장 맞춤제작 씽크제작소</title>
-  <meta name="description" content="씽크제작소의 실제 시공사례를 확인해보세요. 씽크대, 붙박이장, 신발장, 홈바 맞춤 제작 사례 모음." />
+  <meta name="description" content="씽크제작소 실제 시공사례 모음. 인천 부평 씽크대 맞춤제작, 붙박이장, 신발장, 냉장고장 등 다양한 시공사례를 확인해보세요. 네이비 블루, 화이트, 그레이, 우드 등 다양한 컬러와 일자형·ㄱ자형·ㄷ자형·아일랜드 구성." />
   <meta property="og:title" content="시공사례 | 인천 씽크대·붙박이장 맞춤제작 씽크제작소" />
-  <meta property="og:description" content="씽크제작소의 실제 시공사례를 확인해보세요. 씽크대, 붙박이장, 신발장, 홈바 맞춤 제작 사례 모음." />
+  <meta property="og:description" content="씽크제작소 실제 시공사례 모음. 씽크대, 붙박이장, 냉장고장 맞춤 제작 사례를 확인해보세요." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sinkjejakso.com/cases.html" />
+  <meta property="og:url" content="https://sinkjejakso.com/cases" />
   <meta property="og:image" content="https://sinkjejakso.com/assets/hero1.webp" />
-  <link rel="canonical" href="https://sinkjejakso.com/cases.html" />
+  <link rel="canonical" href="https://sinkjejakso.com/cases" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
@@ -30,12 +30,20 @@
 
 <main class="section">
   <div class="container">
-<div class="back-link">
-  <a href="./index.html">← 메인으로</a>
-  </div>
+    <div class="back-link">
+      <a href="./index.html">← 메인으로</a>
+    </div>
 
     <h1 class="section__title">시공사례</h1>
-    <p class="section__subtitle">전체 시공사례를 확인해보세요.</p>
+    <p class="section__subtitle">씽크제작소의 실제 시공사례를 확인해보세요.</p>
+
+    <!-- SEO용 정적 텍스트 (검색엔진에 노출, 사용자에게는 카드로 대체됨) -->
+    <div id="seo-text" style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:24px;">
+      <p>인천 부평 씽크제작소의 맞춤 시공사례입니다. 씽크대(싱크대), 붙박이장, 냉장고장, 신발장 등 공간에 꼭 맞는 맞춤 제작을 직영 공장에서 진행합니다.</p>
+      <p>시공 종류: 일자형 씽크대 · ㄱ자형 씽크대 · ㄷ자형 씽크대 · 아일랜드 씽크대 · 붙박이장 · 냉장고장</p>
+      <p>컬러: 화이트 · 그레이 · 네이비 블루 · 다크 · 우드 패턴 · 투톤</p>
+      <p>인천 · 부평 · 경기 · 서울 전 지역 시공 가능. 문의: 010-9181-5373</p>
+    </div>
 
     <div id="projectGrid" class="grid"></div>
   </div>
@@ -43,35 +51,30 @@
 
 <footer class="footer">
   <div class="container footer__inner" style="flex-direction:column; gap:8px;">
-
-    <div style="font-weight:600; color:var(--text);">
-      씽크제작소
-    </div>
-
-    <div style="font-size:13px;">
-      대표자 : 홍현기 | 사업자등록번호 : 403-16-52620
-    </div>
-
-    <div style="font-size:13px;">
-      주소 : 인천 부평구 경인로891번길 3
-    </div>
-
-    <div style="font-size:13px;">
-      전화 : 010-9181-5373 | e-mail : gusrl3925@naver.com
-    </div>
-    <div style="font-size:13px;">
-      계좌 : 새마을금고 2316100175230 홍현기(씽크제작소)
-    </div>
-
+    <div style="font-weight:600; color:var(--text);">씽크제작소</div>
+    <div style="font-size:13px;">대표자 : 홍현기 | 사업자등록번호 : 403-16-52620</div>
+    <div style="font-size:13px;">주소 : 인천 부평구 경인로891번길 3</div>
+    <div style="font-size:13px;">전화 : 010-9181-5373 | e-mail : gusrl3925@naver.com</div>
+    <div style="font-size:13px;">계좌 : 새마을금고 2316100175230 홍현기(씽크제작소)</div>
     <div style="font-size:12px; color:var(--muted); margin-top:6px;">
       © <span id="year"></span> 씽크제작소. All rights reserved.
     </div>
-
   </div>
 </footer>
 
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
+// 카드 로드되면 SEO 텍스트 숨김
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.getElementById("projectGrid");
+  const seo = document.getElementById("seo-text");
+  const observer = new MutationObserver(() => {
+    if (grid.children.length > 1) {
+      seo.style.display = "none";
+    }
+  });
+  observer.observe(grid, { childList: true });
+});
 </script>
 <script src="./script.js"></script>
 </body>
