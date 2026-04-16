@@ -119,7 +119,7 @@ select,input[type="search"]{
 input[type="search"]{min-width:220px}
 
 /* ── 프로젝트 그리드 ── */
-.grid{margin-top:18px;display:grid;gap:14px;grid-template-columns:repeat(1,minmax(0,1fr))}
+.grid{margin-top:18px;display:grid;gap:14px;grid-template-columns:repeat(1,minmax(0,1fr));min-height:300px}
 .project{
   border:1px solid var(--line);border-radius:var(--radius);
   overflow:hidden;background:#fff;text-decoration:none;color:inherit;
