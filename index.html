@@ -264,5 +264,19 @@
 
   <script src="./script.js"></script>
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+<script>
+// 다른 페이지에서 #anchor로 넘어올 때 헤더 높이만큼 보정
+window.addEventListener("load", () => {
+  const hash = window.location.hash;
+  if (!hash) return;
+  const target = document.querySelector(hash);
+  if (!target) return;
+  setTimeout(() => {
+    const headerH = document.querySelector(".header")?.offsetHeight || 64;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerH - 16;
+    window.scrollTo({ top, behavior: "smooth" });
+  }, 100);
+});
+</script>
 </body>
 </html>
