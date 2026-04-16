@@ -215,7 +215,7 @@ input[type="search"]{min-width:220px}
     flex-direction:row;
     align-items:center;
     gap:8px;
-    padding:10px 0;
+    padding:10px 16px;
   }
   .nav{gap:8px;flex-wrap:nowrap;}
   .nav a{font-size:12px;}
