@@ -16,12 +16,14 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body>
   <header class="header">
     <div class="container header__inner">
-      <a class="logo" href="./index.html">
-        <img src="assets/logo.png" alt="씽크제작소 로고" />
-      </a>
+<a class="logo" href="./index.html">
+  <img src="./assets/logo.png" alt="씽크제작소 로고" />
+</a>
+
       <nav class="nav">
         <a href="./index.html#about">회사소개</a>
         <a href="./index.html#services">서비스</a>
@@ -31,29 +33,28 @@
     </div>
   </header>
 
-  <main>
-    <section class="section">
-      <div class="container">
-        <div class="back-link">
-          <a href="./cases.html">← 목록으로</a>
-        </div>
-        <div id="detail"></div>
-      </div>
-    </section>
+  <main class="section">
+    <div class="container">
+      <!-- <a class="btn" href="./index.html#projects">← 시공사례 목록</a> -->
+<div class="back-link">
+  <a href="./cases.html">← 시공사례 목록으로</a>
+</div>
+
+      <div id="detail" style="margin-top:16px"></div>
+    </div>
   </main>
 
-  <footer class="footer">
-    <div class="container footer__inner" style="flex-direction:column; gap:8px;">
-      <div style="font-weight:600; color:var(--text);">씽크제작소</div>
-      <div style="font-size:13px;">대표자 : 홍현기 | 사업자등록번호 : 403-16-52620</div>
-      <div style="font-size:13px;">주소 : 인천 부평구 경인로891번길 3</div>
-      <div style="font-size:13px;">전화 : 010-9181-5373 | e-mail : gusrl3925@naver.com</div>
-      <div style="font-size:13px;">계좌 : 새마을금고 2316100175230 홍현기(씽크제작소)</div>
-      <div style="font-size:12px; color:var(--muted); margin-top:6px;">
-        © <span id="year"></span> 씽크제작소. All rights reserved.
-      </div>
+<footer class="footer">
+  <div class="container footer__inner" style="flex-direction:column; gap:8px;">
+    <div style="font-weight:600; color:var(--text);">씽크제작소</div>
+    <div style="font-size:13px;">대표자 : 홍현기 | 사업자등록번호 : 403-16-52620</div>
+    <div style="font-size:13px;">주소 : 인천 부평구 경인로891번길 3</div>
+    <div style="font-size:13px;">전화 : 010-9181-5373 | e-mail : gusrl3925@naver.com</div>
+    <div style="font-size:12px; color:var(--muted); margin-top:6px;">
+      © <span id="year"></span> 씽크제작소. All rights reserved.
     </div>
-  </footer>
+  </div>
+</footer>
 
   <script src="./script.js"></script>
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
