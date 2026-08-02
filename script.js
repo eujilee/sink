@@ -323,3 +323,9 @@ if (els.q) els.q.addEventListener("input", renderList);
 renderList();
 renderDetail();
 document.addEventListener("DOMContentLoaded", initSlider);
+
+// =========================
+// 8) iOS :active 활성화
+// 빈 touchstart 리스너가 있어야 iOS에서 :active가 안정적으로 동작함
+// =========================
+document.addEventListener("touchstart", function () {}, { passive: true });
