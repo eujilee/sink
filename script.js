@@ -146,14 +146,12 @@ async function renderList() {
 
   let items = [];
   try {
-    // data-limit 속성이 있으면 그 값, 없으면 전체
-    const limitAttr = els.grid.dataset.limit;
-    const limit = limitAttr ? parseInt(limitAttr) : null;
+    const isHome = !window.location.pathname.includes("cases.html");
 
     items = await fetchProjects({
       work,
       q,
-      limit,
+      limit: isHome ? 6 : null,
     });
   } catch (e) {
     console.error(e);
@@ -229,7 +227,6 @@ async function renderDetail() {
 
 const tags = (p.work || []).map((w) => escapeHtml(WORK_LABEL[w] || w)).join(", ");
 
-// ✅ 대표이미지와 동일한 첫 이미지 블록은 자동으로 제거(중복 방지)
 const filteredContent = Array.isArray(p.content)
   ? p.content.filter((b) => !(b?._type === "image" && b.url && p.image && b.url === p.image))
   : [];
@@ -243,7 +240,7 @@ const bodyHtml = renderContentBlocks(filteredContent);
       ${p.meta ? `<p class="detail__desc">${escapeHtml(p.meta)}</p>` : ""}
 
       <div class="detail__hero">
-        <img src="${p.image}" alt="${p.title}" />
+        <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" />
       </div>
 
       <div class="detail__body">
@@ -303,16 +300,6 @@ function initSlider() {
   if (nextBtn) nextBtn.addEventListener("click", () => { nextSlide(); resetAutoPlay(); });
   if (prevBtn) prevBtn.addEventListener("click", () => { prevSlide(); resetAutoPlay(); });
 }
-
-// =========================
-// 7) 이벤트 바인딩 & 실행
-// =========================
-if (els.work) els.work.addEventListener("change", renderList);
-if (els.q) els.q.addEventListener("input", renderList);
-
-renderList();
-renderDetail();
-document.addEventListener("DOMContentLoaded", initSlider);
 
 // =========================
 // 7) 이벤트 바인딩 & 실행
