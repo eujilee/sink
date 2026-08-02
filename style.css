@@ -12,6 +12,7 @@
 /* ── 기본 리셋 ── */
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+body{overflow-x:hidden;}
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Arial, sans-serif;
@@ -215,10 +216,11 @@ input[type="search"]{min-width:220px}
   .header__inner{
     flex-direction:row;
     align-items:center;
-    gap:8px;
-    padding:10px 16px;
+    gap:10px;
+    padding:10px 0;
+    flex-wrap:wrap;
   }
-  .nav{gap:8px;flex-wrap:nowrap;}
+  .nav{gap:8px;flex-wrap:wrap;}
   .nav a{font-size:12px;}
   .nav__cta{padding:5px 9px;font-size:12px;}
 }
