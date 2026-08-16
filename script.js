@@ -329,3 +329,29 @@ document.addEventListener("DOMContentLoaded", initSlider);
 // 빈 touchstart 리스너가 있어야 iOS에서 :active가 안정적으로 동작함
 // =========================
 document.addEventListener("touchstart", function () {}, { passive: true });
+
+// =========================
+// 9) 전화 문의 플로팅 버튼
+// 첫 화면에는 이미 상담 버튼이 있으므로, 조금 스크롤한 뒤부터 노출
+// =========================
+(function () {
+  const fab = document.querySelector(".callFab");
+  if (!fab) return;
+
+  const SHOW_AFTER = 400;
+  let ticking = false;
+
+  function update() {
+    fab.classList.toggle("is-visible", window.scrollY > SHOW_AFTER);
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", function () {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  update();
+})();
